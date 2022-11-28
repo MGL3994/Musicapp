@@ -6,6 +6,12 @@
 //
 
 import SwiftUI
+import MediaPlayer
+
+var mediaPicker = MPMediaPickerController()
+var mediaQuery = MPMediaQuery.songs()
+var player = MPMusicPlayerController.systemMusicPlayer
+
 
 struct ContentView: View {
     var body: some View {
