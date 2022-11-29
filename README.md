@@ -4,7 +4,7 @@ On this repo I'm working on porting a music app I developed some years ago to re
 
 ### TODO
 
-[ ] Fix album names
+[] Fix album names
 [ ] Search on lists
 [ ] Index and grouping on lists
 [ ] Playing view
