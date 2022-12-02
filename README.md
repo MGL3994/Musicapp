@@ -4,10 +4,10 @@ On this repo I'm working on porting a music app I developed some years ago to re
 
 ### TODO
 
-- [ ] Fix album names
+- [x] Fix album names
 - [ ] Search on lists
 - [ ] Index and grouping on lists
 - [ ] Playing view
-- [ ] Album view
+- [x] Album view
 - [ ] Playlists list and view
 - [ ] Improve Design 
