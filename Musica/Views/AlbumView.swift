@@ -26,7 +26,7 @@ struct AlbumView: View {
         self.albumTitle = (self.album.representativeItem?.albumTitle)!
         self.artist = (self.album.representativeItem?.albumArtist)!
         self.artwork = (self.album.representativeItem?.artwork)!
-        self.artworkImage = artwork.image(at: CGSize(width: 300, height: 300))!
+        self.artworkImage = artwork.image(at: CGSize(width: 300, height: 300)) ?? UIImage(named: "Cover") ?? UIImage()
         songsQuery = MPMediaQuery.songs()
         albumPredicate = MPMediaPropertyPredicate(value: albumTitle, forProperty: MPMediaItemPropertyAlbumTitle)
         songsQuery.addFilterPredicate(albumPredicate)
@@ -35,16 +35,14 @@ struct AlbumView: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack(alignment: .top) {
-                if self.artworkImage != nil {
-                    Image(uiImage: self.artworkImage)
-                        .resizable()
-                        .frame(
-                            width: 100,
-                            height: 100
-                        )
-                        .cornerRadius(6)
-                        //.shadow(radius: 10)
-                }
+
+                Image(uiImage: self.artworkImage)
+                    .resizable()
+                    .frame(
+                        width: 100,
+                        height: 100
+                    )
+                    .cornerRadius(6)
                 VStack(alignment: .leading) {
                     Text(self.albumTitle)
                         .lineLimit(1)

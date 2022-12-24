@@ -11,24 +11,77 @@ import MediaPlayer
 struct ContentView: View {
     
     @ObservedObject var model = Model.shared
-    @Namespace var animation
+
+    #if os(iOS)
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    #endif
+    
     
     var body: some View {
+        
+        #if os(iOS)
+        if horizontalSizeClass == .compact {
+            tabBarView().environmentObject(model)
+        } else {
+            sideBarView().environmentObject(model)
+        }
+        #endif
+    }
+}
 
+struct sideBarView: View {
+    
+    @EnvironmentObject var model: Model
+    @State var selection: String? = "Canciones"
+    let sidebarOps = ["Canciones", "Albums", "Artistas"]
+    
+    var body: some View {
+        NavigationSplitView {
+            List(sidebarOps, id: \.self, selection: $selection) { op in
+                NavigationLink(value: op, label: { Text(op)} )
+            }.navigationTitle("Biblioteca")
+        } detail: {
+            if let section = selection {
+                switch section {
+                case "Canciones":
+                    SongsView()
+                        .environmentObject(model)
+                case "Albums":
+                    AlbumsView()
+                        .environmentObject(model)
+                case "Artistas":
+                    ArtistsView()
+                        .environmentObject(model)
+                default:
+                    SongsView()
+                        .environmentObject(model)
+                }
+            }
+        }
+    }
+}
+
+
+struct tabBarView: View {
+    
+    @EnvironmentObject var model: Model
+    @State var selectedTab = 0
+    
+    var body: some View {
         ZStack {
-            TabView() {
-                VStack(spacing: 0) {
+            TabView(selection: $selectedTab) {
+                NavigationView {
                     PlaylistsView()
                         .environmentObject(model)
                 }
                 .tabItem {
                     VStack{
                         Image(systemName: "music.note.list")
-                        Text("Listas")
+                        Text("Playlists")
                     }
-                }
+                }.tag(0)
                 
-                VStack(spacing: 0) {
+                NavigationView {
                     SongsView()
                         .environmentObject(model)
                 }
@@ -37,9 +90,9 @@ struct ContentView: View {
                         Image(systemName: "music.note")
                         Text("Canciones")
                     }
-                }
+                }.tag(1)
                 
-                VStack(spacing: 0) {
+                NavigationView {
                     AlbumsView()
                         .environmentObject(model)
                 }
@@ -48,10 +101,9 @@ struct ContentView: View {
                         Image(systemName: "square.stack")
                         Text("Álbumes")
                     }
-                    
-                }
+                }.tag(2)
                 
-                VStack(spacing: 0) {
+                NavigationView {
                     ArtistsView()
                         .environmentObject(model)
                 }
@@ -60,8 +112,7 @@ struct ContentView: View {
                         Image(systemName: "music.mic")
                         Text("Artistas")
                     }
-                    
-                }
+                }.tag(3)
             }
             .zIndex(1.0)
             .sheet(isPresented: $model.isPlayerOpen, content: {
@@ -70,86 +121,5 @@ struct ContentView: View {
             })
         }
     }
+    
 }
-
-/*
- 
- 
- ZStack {
-     TabView() {
-         VStack(spacing: 0) {
-             PlaylistsView()
-                 .environmentObject(model)
-             if !model.isPlayerOpen {
-                 NowPlayingBarView(animation: animation)
-                     .environmentObject(model)
-             }
-         }
-         .tabItem {
-             VStack{
-                 Image(systemName: "music.note.list")
-                 Text("Listas")
-             }
-         }
-         
-         VStack(spacing: 0) {
-             SongsView()
-                 .environmentObject(model)
-             if !model.isPlayerOpen {
-                 NowPlayingBarView(animation: animation)
-                     .environmentObject(model)
-             }
-         }
-         .tabItem {
-             VStack{
-                 Image(systemName: "music.note")
-                 Text("Canciones")
-             }
-         }
-         
-         VStack(spacing: 0) {
-             AlbumsView()
-                 .environmentObject(model)
-             if !model.isPlayerOpen {
-                 NowPlayingBarView(animation: animation)
-                     .environmentObject(model)
-             }
-         }
-         .tabItem {
-             VStack{
-                 Image(systemName: "square.stack")
-                 Text("Álbumes")
-             }
-             
-         }
-         
-         VStack(spacing: 0) {
-             ArtistsView()
-                 .environmentObject(model)
-             if !model.isPlayerOpen {
-                 NowPlayingBarView(animation: animation)
-                     .environmentObject(model)
-             }
-         }
-         .tabItem {
-             VStack{
-                 Image(systemName: "music.mic")
-                 Text("Artistas")
-             }
-             
-         }
-     }
-     .zIndex(1.0)
-     
-     if model.isPlayerOpen {
-         NowPlayingView(animation: animation)
-             .environmentObject(model)
-             .edgesIgnoringSafeArea(.all)
-             .zIndex(2.0)
-             .onTapGesture {
-                 model.isPlayerOpen.toggle()
-             }
-     }
- }
- 
- */

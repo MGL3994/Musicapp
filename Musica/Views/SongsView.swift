@@ -17,33 +17,32 @@ struct SongsView: View {
     
     var body: some View {
         
-        NavigationView{
-            List {
-                ForEach(songsList, id: \.self) { song in
-                    SongCell(song: song)
-                        .environmentObject(model)
-                }
-            }
-            .listStyle(PlainListStyle())
-            .navigationBarTitle("Canciones")
-            .toolbar {
-                Button(action: {
-                    model.isPlayerOpen.toggle()
-                }) {
-                    Image(systemName: "play.circle.fill")
-                }
-            }
-            .searchable(text: $searchText, prompt: "Buscar")
-            .onChange(of: searchText) { _ in
-                songsList = listSongs()
-            }
-            .onSubmit(of: .search) {
-                songsList = listSongs()
-            }
-            .onAppear() {
-                songsList = listSongs()
+        List {
+            ForEach(songsList, id: \.self) { song in
+                SongCell(song: song)
+                    .environmentObject(model)
             }
         }
+        .listStyle(PlainListStyle())
+        .navigationBarTitle("Canciones")
+        .toolbar {
+            Button(action: {
+                model.isPlayerOpen.toggle()
+            }) {
+                Image(systemName: "play.circle.fill")
+            }
+        }
+        .searchable(text: $searchText, prompt: "Buscar")
+        .onChange(of: searchText) { _ in
+            songsList = listSongs()
+        }
+        .onSubmit(of: .search) {
+            songsList = listSongs()
+        }
+        .onAppear() {
+            songsList = listSongs()
+        }
+        
     }
     
     func listSongs() -> [MPMediaItem] {

@@ -83,7 +83,7 @@ struct NowPlayingView: View {
                     Spacer()
                 }
                 
-                HStack {
+                /*HStack {
                     Image(systemName: "speaker.fill")
                         .foregroundColor(.secondary)
                         .font(.system(size: 12))
@@ -93,7 +93,9 @@ struct NowPlayingView: View {
                         .font(.system(size: 12))
                 }
                 .padding(.horizontal, 30)
-                .padding(.vertical, 30)
+                .padding(.vertical, 30)*/
+                
+                Spacer()
                 
                 HStack {
                     Spacer()

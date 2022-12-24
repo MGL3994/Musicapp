@@ -7,6 +7,7 @@
 
 import SwiftUI
 import MediaPlayer
+import AVFoundation
 
 struct SongCell: View {
 
@@ -23,21 +24,16 @@ struct SongCell: View {
             model.isPlayerOpen.toggle()
         }) {
             HStack() {
-                if song.artwork != nil {
-                    Image(uiImage: song.artwork!.image(at: CGSize(width: 50, height: 50))!)
-                        .resizable()
-                        .frame(width: 50, height: 50)
-                        .cornerRadius(4)
-                }
+                Image(uiImage: song.artwork!.image(at: CGSize(width: 50, height: 50)) ?? UIImage(named: "Cover") ?? UIImage())
+                    .resizable()
+                    .frame(width: 50, height: 50)
+                    .cornerRadius(4)
                 VStack(alignment: .leading) {
                     Text(song.title!)
                         .bold()
-                    Text(song.artist!).font(.system(.callout)).opacity(0.4)
+                    Text(song.artist ?? "Desconocido").font(.system(.callout)).opacity(0.4)
                 }
                 Spacer()
-                /*Text(song.playbackDuration.stringFromTimeInterval())
-                    .opacity(0.4)
-                    .padding(.horizontal, 5)*/
             }}
             .frame(
                 minHeight: 37,

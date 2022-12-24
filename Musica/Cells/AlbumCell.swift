@@ -16,16 +16,13 @@ struct AlbumCell: View {
         
         NavigationLink(destination: AlbumView(album: album), label: {
             HStack() {
-                if album.representativeItem?.artwork != nil {
-                    Image(uiImage: (album.representativeItem?.artwork?.image(at: CGSize(width: 50, height: 50)))!)
-                        .resizable()
-                        .frame(width: 50, height: 50)
-                        .cornerRadius(4)
-                }
+                Image(uiImage: album.representativeItem?.artwork?.image(at: CGSize(width: 50, height: 50)) ?? UIImage(named: "Cover") ?? UIImage())
+                    .resizable()
+                    .frame(width: 50, height: 50)
+                    .cornerRadius(4)
                 VStack(alignment: .leading) {
                     Text(album.representativeItem?.albumTitle ?? "-")
                         .bold()
-
                     Text(album.representativeItem?.albumArtist ?? "-").font(.system(.callout)).opacity(0.4)
                 }
             }.frame(

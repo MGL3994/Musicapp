@@ -16,32 +16,32 @@ struct PlaylistsView: View {
     
     var body: some View {
         
-        NavigationView {
-            List {
-                ForEach(model.playlists, id: \.self) { playlist in
-                    PlaylistCell(playlist: playlist)
-                }
-            }
-            .listStyle(PlainListStyle())
-            .navigationBarTitle("Listas")
-            .toolbar {
-                Button(action: {
-                    model.isPlayerOpen.toggle()
-                }) {
-                    Image(systemName: "play.circle.fill")
-                }
-            }
-            .searchable(text: $searchText, prompt: "Buscar")
-            .onChange(of: searchText) { _ in
-                playlistsList = listPlaylist()
-            }
-            .onSubmit(of: .search) {
-                playlistsList = listPlaylist()
-            }
-            .onAppear() {
-                playlistsList = listPlaylist()
+        
+        List {
+            ForEach(model.playlists, id: \.self) { playlist in
+                PlaylistCell(playlist: playlist)
             }
         }
+        .listStyle(PlainListStyle())
+        .navigationBarTitle("Listas")
+        .toolbar {
+            Button(action: {
+                model.isPlayerOpen.toggle()
+            }) {
+                Image(systemName: "play.circle.fill")
+            }
+        }
+        .searchable(text: $searchText, prompt: "Buscar")
+        .onChange(of: searchText) { _ in
+            playlistsList = listPlaylist()
+        }
+        .onSubmit(of: .search) {
+            playlistsList = listPlaylist()
+        }
+        .onAppear() {
+            playlistsList = listPlaylist()
+        }
+        
     }
     
     func listPlaylist() -> [MPMediaItemCollection] {
