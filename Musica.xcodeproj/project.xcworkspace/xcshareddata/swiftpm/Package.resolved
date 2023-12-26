@@ -8,6 +8,42 @@
         "branch" : "master",
         "revision" : "c0d4e579cef1777975ba5bd9d46e50c40e377c8f"
       }
+    },
+    {
+      "identity" : "locationprovider",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/himbeles/LocationProvider",
+      "state" : {
+        "revision" : "929019fb7b9c337a79aee25bcaf297b18faf728d",
+        "version" : "1.6.0"
+      }
+    },
+    {
+      "identity" : "pure-swift-ui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/CodeSlicing/pure-swift-ui.git",
+      "state" : {
+        "revision" : "f3cf6c8e49b19ce5076d06ad0ace841ef8f78092",
+        "version" : "3.1.0"
+      }
+    },
+    {
+      "identity" : "pure-swift-ui-design",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/CodeSlicing/pure-swift-ui-design.git",
+      "state" : {
+        "revision" : "40489273ee4703032c7d4d185ac25743f604e158",
+        "version" : "1.0.0"
+      }
+    },
+    {
+      "identity" : "pure-swift-ui-tools",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/CodeSlicing/pure-swift-ui-tools",
+      "state" : {
+        "revision" : "69506a53b1a2cf3bc35a7b050f7977d3840d1aa8",
+        "version" : "3.0.0"
+      }
     }
   ],
   "version" : 2

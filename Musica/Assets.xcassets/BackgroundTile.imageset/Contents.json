@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "noartplaceholder@2x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "noartplaceholder@2x 1.png",
+      "filename" : "BackgroundTile@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "noartplaceholder@2x 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

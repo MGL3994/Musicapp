@@ -25,7 +25,8 @@ struct MusicaApp: App {
                     if value == .active {
                         Model.shared.initialize()
                     }
-                }).accentColor(.pink)
+                })
+                .accentColor(.pink)
         }
     }
 }

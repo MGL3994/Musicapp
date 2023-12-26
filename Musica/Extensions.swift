@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-extension TimeInterval{
+extension TimeInterval {
 
     func stringFromTimeInterval() -> String {
 

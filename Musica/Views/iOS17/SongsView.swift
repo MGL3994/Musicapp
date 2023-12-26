@@ -16,7 +16,7 @@ struct SongsView: View {
     @State private var songsList: [MPMediaItem] = []
     
     var body: some View {
-        
+            
         List {
             ForEach(songsList, id: \.self) { song in
                 SongCell(song: song)
@@ -42,7 +42,6 @@ struct SongsView: View {
         .onAppear() {
             songsList = listSongs()
         }
-        
     }
     
     func listSongs() -> [MPMediaItem] {
